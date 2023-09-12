@@ -43,10 +43,10 @@ namespace Repository_pattern.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody]user value)
         {
-            var user = repomethods.Find(id);
-            if (user != null)
+
+            if (id != null)
             {
-                var K=await repomethods.DeleteAsync(user);
+                var K=await repomethods.DeleteAsync(id);
                 var k = await repomethods.Addasync(value);
                 return k == true ? Ok("Updated Successfully") : NoContent();
             }
@@ -58,8 +58,8 @@ namespace Repository_pattern.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var user =repomethods.Find(id);
-            var k=await repomethods.DeleteAsync(user);
+           // var user =await repomethods.Find(id);
+            var k=await repomethods.DeleteAsync(id);
             return k == true ? Ok("Deleted successfully") : NoContent();
 
         }

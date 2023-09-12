@@ -25,10 +25,11 @@ namespace Repository_pattern.Repository
             }
         }
 
-        public Task<bool> DeleteAsync(T entity)
+        public Task<bool> DeleteAsync(int id)
         {
             try
             {
+                T entity =dbcontext.Set<T>().Find(id);
                 dbcontext.Set<T>().Remove(entity);
                 dbcontext.SaveChanges();
                 return Task.FromResult(true);
@@ -39,10 +40,10 @@ namespace Repository_pattern.Repository
             }
         }
 
-        public  T Find(int id)
+        public  Task<T> Find(int id)
         {
            T entity =dbcontext.Set<T>().Find(id);
-          return entity;
+          return Task.FromResult(entity);
         } 
 
         public Task<List<T>> GetAllasync()
